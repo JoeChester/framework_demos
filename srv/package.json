@@ -1,0 +1,20 @@
+{
+  "name": "todo-srv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "1.17.1",
+    "bookshelf": "0.10.3",
+    "caminte": "^0.3.6",
+    "chalk": "1.1.3",
+    "express": "4.15.2",
+    "knex": "0.12.9",
+    "pg": "6.1.5"
+  }
+}
