@@ -1,6 +1,197 @@
+<!DOCTYPE html>
 <html>
-    <head>
-    </head>
-    <body>
-    </body>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#222222">
+    <title>F7 Skeleton</title>
+    <link rel="stylesheet" href="/f7/css/framework7.material.css">
+    <link rel="stylesheet" href="/f7/css/framework7.material.colors.css">
+    <style>
+        .navbar,
+        .toolbar,
+        .subnavbar {
+            background: #00b482;
+        }
+        
+        .navbar a.link {
+            background-color: #711e82;
+        }
+        
+        .floating-button.braunpurple {
+            background-color: #711e82;
+        }
+        
+        .floating-button.braunpurple.active-state {
+            background-color: #984a97;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="panel-overlay"></div>
+
+    <div class="panel panel-left panel-reveal">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left"></div>
+                <div class="center"></div>
+                <div class="right">
+                    <a href="#" class="link icon-only close-panel">
+                        <i class="icon icon-close"></i>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="list-block">
+            <ul>
+                <li>
+                    <a class="item-link item-content close-panel" onclick="load('todos')">
+                        <div class="item-inner">
+                            <div class="item-title">Todos</div>
+                            <div class="item-after"><span class="badge">2</span></div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="item-link item-content close-panel" onclick="load('newtodo')">
+                        <div class="item-inner">
+                            <div class="item-title">New Todo</div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="views">
+        <div class="view view-main">
+            <div class="pages navbar-fixed">
+                <div data-page="todos" class="page cached">
+
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <div class="left">
+                                <a href="#" class="link icon-only open-panel">
+                                    <i class="icon icon-bars"></i>
+                                </a>
+                            </div>
+                            <div class="center">Todos</div>
+                            <div class="right"></div>
+                        </div>
+                    </div>
+
+                    <div class="page-content">
+                        <br>
+                        <div class="card">
+                            <div class="list-block">
+                                <ul>
+                                    <li class="swipeout">
+                                        <div class="swipeout-content item-content">
+                                            <div class="item-inner">Test Todo 1</div>
+                                        </div>
+                                        <div class="swipeout-actions-right">
+                                            <a class="action1 bg-green" onclick="done(this)">Done</a>
+                                            <a class="action2 swipeout-delete">Delete</a>
+                                        </div>
+                                    </li>
+
+                                    <li class="swipeout">
+                                        <div class="swipeout-content item-content">
+                                            <div class="item-inner">Test Todo 2</div>
+                                        </div>
+                                        <div class="swipeout-actions-right">
+                                            <a class="action1 bg-green" onclick="done(this)">Done</a>
+                                            <a class="action2 swipeout-delete">Delete</a>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div data-page="newtodo" class="page cached">
+
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <div class="left">
+                                <a href="#" class="link icon-only open-panel">
+                                    <i class="icon icon-bars"></i>
+                                </a>
+                            </div>
+                            <div class="center">New Todo</div>
+                            <div class="right"></div>
+                        </div>
+                    </div>
+
+                    <a class="floating-button braunpurple" onclick="add()">
+                        <i class="icon icon-plus"></i>
+                    </a>
+
+                    <div class="page-content">
+                        <br>
+
+                        <div class="card">
+                            <div class="list-block">
+                                <ul>
+                                    <li>
+                                        <div class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title label">Title:</div>
+                                                <div class="item-input">
+                                                    <input type="text" placeholder="Todo Title">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/f7/js/framework7.js"></script>
+
+    <script>
+        var app = new Framework7({
+            pushState: true,
+            allowDuplicateUrls: true
+        });
+        var $$ = Dom7;
+        var mainView = app.addView('.view-main', {
+            domCache: true,
+            allowDuplicateUrls: true
+        });
+        mainView.router.load({ pageName: 'todos' });
+        console.log("app init");
+
+        function load(pageName) {
+            mainView.router.load({ pageName: pageName });
+        }
+
+        function done(item) {
+            app.swipeoutClose($$(item)[0].parentElement.parentElement, function () { });
+        }
+
+        function add() {
+            app.alert("Successfully added!", "Add Todo", function () {
+                load('todos');
+            })
+        }
+    </script>
+
+</body>
+
 </html>
