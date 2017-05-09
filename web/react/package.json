@@ -1,0 +1,15 @@
+{
+  "name": "f7-react-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "framework7-react": "^0.8.5-beta.9",
+    "react": "^15.5.4"
+  }
+}

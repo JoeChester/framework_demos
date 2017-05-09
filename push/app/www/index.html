@@ -1,0 +1,187 @@
+<html>
+
+<head>
+    <title>
+        B.Braun OnlineSuite Push Technology Evaluation
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#222222">
+    <link rel="stylesheet" href="/lib/css/framework7.material.css">
+    <link rel="stylesheet" href="/lib/css/framework7.material.colors.css">
+    <style>
+        .navbar,
+        .toolbar,
+        .subnavbar {
+            background: #00b482;
+        }
+
+        .navbar a.link {
+            background-color: #711e82;
+        }
+
+        .floating-button.braunpurple {
+            background-color: #711e82;
+        }
+
+        .floating-button.braunpurple.active-state {
+            background-color: #984a97;
+        }
+
+        .right {
+            position: absolute;
+            right: 0px;
+        }
+
+        .x-sign {
+            padding: 10px;
+            font-size: 2rem;
+        }
+
+        #pushlog {
+            color: #00b482;
+            height: 100%;
+            width: 100%;
+            padding: 5px;
+        }
+
+        #active-indicator {
+            padding-right: 10px;
+        }
+
+        .inactive {
+            color: #FF0000;
+        }
+
+        .active {
+            color: #00FF00;
+        }
+        .page-content{
+            background-color: #222222;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="views">
+        <div class="view view-main">
+            <div class="pages navbar-fixed">
+                <div data-page="index" class="page">
+
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <div class="left"></div>
+                            <div class="center">OnlineSuite Push Eval</div>
+                            <div class="right">
+                                <span id="active-indicator" class="inactive">●</span>
+                                <a href="#" data-popup=".popup-settings" class="link icon-only open-popup">
+                                    <i class="icon icon-bars"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-content">
+                        <div id="pushlog"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup popup-settings">
+        <a href="#" class="link icon-only close-popup right x-sign">
+            <i class="icon">x</i>
+        </a>
+        <div class="content-block-title">IP</div>
+        <div class="list-block">
+            <ul>
+                <li>
+                    <div class="item-content">
+                        <div class="item-input">
+                            <input id="ipinput" type="text" placeholder="Server IP Adress">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="content-block-title">Protocol</div>
+        <div class="list-block">
+            <ul>
+                <li>
+                    <label class="label-radio item-content">
+                <input type="radio" name="protocol" value="fcm" checked="checked">
+                <div class="item-media">
+                    <i class="icon icon-form-radio"></i>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title">Firebase Cloud Messaging</div>
+                </div>
+                </label>
+                </li>
+
+                <li>
+                    <label class="label-radio item-content">
+                <input type="radio" name="protocol" value="ws">
+                <div class="item-media">
+                <i class="icon icon-form-radio"></i>
+                </div>
+                <div class="item-inner">
+                <div class="item-title">WebSocket</div>
+                </div>
+                </label>
+                </li>
+
+                <li>
+                    <label class="label-radio item-content">
+                <input type="radio" name="protocol" value="sse">
+                <div class="item-media">
+                <i class="icon icon-form-radio"></i>
+                </div>
+                <div class="item-inner">
+                <div class="item-title">Server Sent Events</div>
+                </div>
+                </label>
+                </li>
+
+                <li>
+                    <label class="label-radio item-content">
+                <input type="radio" name="protocol" value="mqtt">
+                <div class="item-media">
+                <i class="icon icon-form-radio"></i>
+                </div>
+                <div class="item-inner">
+                <div class="item-title">MQTT</div>
+                </div>
+                </label>
+                </li>
+
+                <li>
+                    <label class="label-radio item-content">
+                <input type="radio" name="protocol" value="poll">
+                <div class="item-media">
+                <i class="icon icon-form-radio"></i>
+                </div>
+                <div class="item-inner">
+                <div class="item-title">HTTP Polling</div>
+                </div>
+                </label>
+                </li>
+            </ul>
+        </div>
+
+        <div class="content-block">
+            <a onclick="start()" class="button button-fill button-raised color-green">Start</a>
+            <a onclick="stop()" class="button button-fill button-raised color-red">Stop</a>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="/lib/js/framework7.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+
+</html>
