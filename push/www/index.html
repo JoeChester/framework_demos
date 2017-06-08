@@ -7,60 +7,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#222222">
-    <link rel="stylesheet" href="/lib/css/framework7.material.css">
-    <link rel="stylesheet" href="/lib/css/framework7.material.colors.css">
-    <style>
-        .navbar,
-        .toolbar,
-        .subnavbar {
-            background: #00b482;
-        }
-
-        .navbar a.link {
-            background-color: #711e82;
-        }
-
-        .floating-button.braunpurple {
-            background-color: #711e82;
-        }
-
-        .floating-button.braunpurple.active-state {
-            background-color: #984a97;
-        }
-
-        .right {
-            position: absolute;
-            right: 0px;
-        }
-
-        .x-sign {
-            padding: 10px;
-            font-size: 2rem;
-        }
-
-        #pushlog {
-            color: #00b482;
-            height: 100%;
-            width: 100%;
-            padding: 5px;
-        }
-
-        #active-indicator {
-            padding-right: 10px;
-        }
-
-        .inactive {
-            color: #FF0000;
-        }
-
-        .active {
-            color: #00FF00;
-        }
-        .page-content{
-            background-color: #222222;
-        }
-    </style>
+    <meta name="theme-color" content="#00b482">
+    <link rel="stylesheet" href="lib/css/framework7.material.css">
+    <link rel="stylesheet" href="lib/css/framework7.material.colors.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -72,13 +22,15 @@
 
                     <div class="navbar">
                         <div class="navbar-inner">
-                            <div class="left"></div>
-                            <div class="center">OnlineSuite Push Eval</div>
-                            <div class="right">
-                                <span id="active-indicator" class="inactive">●</span>
+                            <div class="left">
                                 <a href="#" data-popup=".popup-settings" class="link icon-only open-popup">
                                     <i class="icon icon-bars"></i>
                                 </a>
+                            </div>
+                            <div class="center navbar-title">OnlineSuite Push Eval</div>
+                            <div class="right">
+                                <span id="type-indicator"></span>
+                                <span id="active-indicator" class="connectivity-indicator inactive"></span>
                             </div>
                         </div>
                     </div>
@@ -86,29 +38,52 @@
                     <div class="page-content">
                         <div id="pushlog"></div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 
     <div class="popup popup-settings">
-        <a href="#" class="link icon-only close-popup right x-sign">
-            <i class="icon">x</i>
-        </a>
-        <div class="content-block-title">IP</div>
-        <div class="list-block">
+        <div class="navbar navbar-white">
+            <div class="navbar-inner">
+                <div class="left"></div>
+                <div class="center"></div>
+                <div class="right">
+                    <a href="#" class="link icon-only close-popup">
+                        <i class="icon">x</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-block-title no-padding-top">Configuration</div>
+        <div class="list-block small-margin-bottom">
             <ul>
                 <li>
                     <div class="item-content">
-                        <div class="item-input">
-                            <input id="ipinput" type="text" placeholder="Server IP Adress">
+                        <div class="item-inner">
+                            <div class="item-title label">IP</div>
+                            <div class="item-input">
+                                <input id="ipinput" type="text" placeholder="Server IP Adress (default)">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">Ping</div>
+                            <div class="item-input">
+                                <input id="pinginput" type="text" placeholder="Ping Interval in Seconds (10)">
+                            </div>
                         </div>
                     </div>
                 </li>
             </ul>
         </div>
 
-        <div class="content-block-title">Protocol</div>
+        <div class="content-block-title no-margin-top">Protocol</div>
         <div class="list-block">
             <ul>
                 <li>
@@ -174,14 +149,31 @@
         </div>
 
         <div class="content-block">
-            <a onclick="start()" class="button button-fill button-raised color-green">Start</a>
-            <a onclick="stop()" class="button button-fill button-raised color-red">Stop</a>
+            <a onclick="start()" class="button button-fill button-raised color-teal">Start</a>
+            <a onclick="stop()" class="button button-fill button-raised color-deeppurple">Stop</a>
+            <br><br>
+            <a onclick="qr()" class="button button-fill button-raised color-teal close-popup">QR Scan Test</a>
         </div>
 
     </div>
 
-    <script type="text/javascript" src="/lib/js/framework7.js"></script>
-    <script src="/js/main.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+
+    <!-- Import Dependencies / Libraries -->
+    <script type="text/javascript" src="lib/js/moment.js"></script>
+    <script type="text/javascript" src="lib/js/framework7.js"></script>
+    <script type="text/javascript" src="lib/js/axios.min.js"></script>
+
+    <script src="js/util.js"></script>
+    <!-- Import different connector scripts -->
+    <script src="js/protocols/fcm_test.js"></script>
+    <script src="js/protocols/mqtt_test.js"></script>
+    <script src="js/protocols/poll_test.js"></script>
+    <script src="js/protocols/sse_test.js"></script>
+    <script src="js/protocols/ws_test.js"></script>
+
+    <!-- Start Main Application -->
+    <script src="js/main.js"></script>
 </body>
 
 </html>

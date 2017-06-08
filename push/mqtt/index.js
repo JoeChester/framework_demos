@@ -78,6 +78,6 @@ function setup() {
   console.log(chalk.bold.green("B.Braun OnlineSuite Push Technology Evaluation - Mosca MQTT"));
   console.log(
     chalk.grey("[" + moment().format('HH:mm:ss') + "] ")
-    + 'Mosca MQTT server is up and running'
+    + 'Mosca MQTT server is up and running on port 1883'
     )
 }

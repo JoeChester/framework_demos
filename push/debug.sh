@@ -1,0 +1,1 @@
+adb -s model:HTC_10 logcat chromium:V *:S

@@ -11,29 +11,31 @@ let nextClientId = 0
 
 let clients = []
 
+let pingInterval = 10;
+
 function rawBody(req, res, next) {
-  req.setEncoding('utf8');
-  req.rawBody = '';
-  req.on('data', function(chunk) {
-    req.rawBody += chunk;
-  });
-  req.on('end', function(){
-    next();
-  });
+    req.setEncoding('utf8');
+    req.rawBody = '';
+    req.on('data', function (chunk) {
+        req.rawBody += chunk;
+    });
+    req.on('end', function () {
+        next();
+    });
 }
 app.use(rawBody)
 
-app.get("/sse", (req, res) =>{
+app.get("/sse", (req, res) => {
     let serverSent = SSE(res)
     serverSent.clientId = nextClientId
     serverSent.disconnect(function () {
-        for(let i in clients){
-            if(clients[i].clientId == serverSent.clientId){
+        for (let i in clients) {
+            if (clients[i].clientId == serverSent.clientId) {
                 console.log(
-                chalk.grey("[" + moment().format('HH:mm:ss') + "] ") +
-                    "disconnected: ", i
+                    chalk.grey("[" + moment().format('HH:mm:ss') + "] ") +
+                    "disconnected: ", serverSent.clientId
                 )
-                clients.splice(i,1)
+                clients.splice(i, 1)
             }
         }
     })
@@ -42,18 +44,18 @@ app.get("/sse", (req, res) =>{
     res.connection.setTimeout(0)
     clients.push(serverSent)
     console.log(
-    chalk.grey("[" + moment().format('HH:mm:ss') + "] ") +
-        "clientConnected: ", res.clientId
+        chalk.grey("[" + moment().format('HH:mm:ss') + "] ") +
+        "clientConnected: ", serverSent.clientId
     )
 })
 
 //send broadcast
-app.post("/sse", (req,res) =>{
-    for(var i in clients){
-        if(clients[i].sendEvent){
+app.post("/sse", (req, res) => {
+    for (var i in clients) {
+        if (clients[i].sendEvent) {
             console.log(
-            chalk.grey("[" + moment().format('HH:mm:ss') + "] ") +
-                "broadcast: ", req.rawBody, i
+                chalk.grey("[" + moment().format('HH:mm:ss') + "] ") +
+                "broadcast: ", req.rawBody, "to client", i
             )
             clients[i].sendEvent("broadcast", req.rawBody)
         }
@@ -61,11 +63,20 @@ app.post("/sse", (req,res) =>{
     res.sendStatus(200)
 })
 
-app.listen(4748, function(){
-  console.log("");
-  console.log(chalk.bold.green("B.Braun OnlineSuite Push Technology Evaluation - Express SSE"));
-  console.log(
-    chalk.grey("[" + moment().format('HH:mm:ss') + "] ")
-    + 'Express SSE server is up and running'
+
+
+app.listen(4748, function () {
+    console.log("");
+    console.log(chalk.bold.green("B.Braun OnlineSuite Push Technology Evaluation - Express SSE"));
+    console.log(
+        chalk.grey("[" + moment().format('HH:mm:ss') + "] ")
+        + 'Express SSE server is up and running on port 4748'
     )
+    setInterval(function ping() {
+        for (var i in clients) {
+            if (clients[i].sendEvent) {
+                clients[i].sendEvent("ping", ".")
+            }
+        }
+    }, 1000 * pingInterval);
 })

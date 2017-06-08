@@ -4,10 +4,12 @@ const chalk = require('chalk')
 
 const wss = new WebSocket.Server({ port: 4750 });
 
+const heartbeatPayload = '.';
+
 let nextClientId = 0
 
-function heartbeat() {
-  this.isAlive = true;
+function heartbeat(ws) {
+  ws.isAlive = true;
 }
 
 // Broadcast to all.
@@ -28,10 +30,12 @@ wss.on('connection', function connection(ws) {
     nextClientId++
 
     ws.isAlive = true;
-    ws.on('pong', heartbeat);
-
 
     ws.on('message', function incoming(data) {
+        if(data == heartbeatPayload){
+            heartbeat(this);
+            return;
+        }
         // Broadcast to everyone else.
         console.log(
             chalk.grey("[" + moment().format('HH:mm:ss') + "] ") +
@@ -57,13 +61,13 @@ const interval = setInterval(function ping() {
     if (ws.isAlive === false) return ws.terminate();
 
     ws.isAlive = false;
-    ws.ping('', false, true);
+    ws.send(heartbeatPayload);
   });
-}, 30000);
+}, 10000);
 
 console.log("");
 console.log(chalk.bold.green("B.Braun OnlineSuite Push Technology Evaluation - WebSockets"));
 console.log(
     chalk.grey("[" + moment().format('HH:mm:ss') + "] ")
-    + 'WebSocket server is up and running'
+    + 'WebSocket server is up and running on port 4750'
 )

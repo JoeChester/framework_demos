@@ -2,4 +2,10 @@ node_modules
 f7
 lib
 
+platforms
+plugins
+
 config.json
+secrets.json
+google-services.json
+

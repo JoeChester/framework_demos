@@ -1,0 +1,132 @@
+.navbar,
+.toolbar,
+.subnavbar {
+    background: #00b482;
+}
+
+.navbar-white {
+    background: #FFFFFF !important;
+}
+
+.navbar a.link {
+    background-color: #711e82;
+}
+
+.floating-button.braunpurple {
+    background-color: #711e82;
+}
+
+.floating-button.braunpurple.active-state {
+    background-color: #984a97;
+}
+
+.right {
+    position: absolute;
+    right: 0px;
+}
+
+.x-sign {
+    padding: 10px;
+    font-size: 2rem;
+}
+
+#pushlog {
+    color: #00b482;
+    height: 100%;
+    width: 100%;
+    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+    font-size: 1rem;
+    word-wrap: break-word;
+}
+
+.console-timestamp {
+    color: #dddddd;
+}
+
+.console-error{
+    color: #c5004b;
+}
+
+.console-message{
+    color: #fecc00;
+}
+
+#type-indicator {
+    font-size: 0.6rem;
+    margin-right: 5px;
+}
+
+#active-indicator {
+    padding-right: 10px;
+}
+
+.connectivity-indicator {
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border-color: #FFFFFF;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.inactive {
+    background-color: #c5004b;
+}
+
+.active {
+    background-color: #40c7a1;
+}
+
+.page-content {
+    background-color: #222222;
+}
+
+.no-padding-top {
+    padding-top: 0px;
+}
+
+.navbar-title {
+    margin-left: 35px !important;
+}
+
+.small-margin-bottom{
+    margin-bottom: 4px;
+}
+
+.no-margin-top{
+    margin-bottom: 4px;
+}
+
+.button.button-fill.bg-teal, .button.button-fill.color-teal {
+    background: #00b482 !important;
+}
+
+.button.button-fill.bg-teal.active-state, .button.button-fill.color-teal.active-state {
+    background: #40c7a1 !important;
+}
+
+.button.button-fill.bg-deeppurple, .button.button-fill.color-deeppurple {
+    background: #711e82 !important;
+}
+
+.button.button-fill.bg-deeppurple.active-state, .button.button-fill.color-deeppurple.active-state {
+    background-color: #984a97 !important;
+}
+
+.floating-button.color-deeppurple, 
+.speed-dial-buttons a.color-deeppurple, 
+.floating-button.bg-deeppurple, 
+.speed-dial-buttons a.bg-deeppurple {
+    background: #711e82;
+}
+
+.floating-button.color-deeppurple.active-state, 
+.speed-dial-buttons a.color-deeppurple.active-state, 
+.floating-button.bg-deeppurple.active-state, 
+.speed-dial-buttons a.bg-deeppurple.active-state {
+    background: #984a97;
+}
+
+.bigicon{
+    font-size: 2rem;
+}

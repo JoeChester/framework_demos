@@ -59,6 +59,6 @@ app.listen(4751, function () {
     console.log(chalk.bold.green("B.Braun OnlineSuite Push Technology Evaluation - HTTP Polling"));
     console.log(
         chalk.grey("[" + moment().format('HH:mm:ss') + "] ")
-        + 'Express HTTP Polling server is up and running'
+        + 'Express HTTP Polling server is up and running on port 4751'
     )
 })
