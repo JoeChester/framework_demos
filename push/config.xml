@@ -1,13 +1,15 @@
-<?xml version='1.0' encoding='utf-8'?>
-<widget id="com.bbraun.spaceserver.pusheval" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>OnlineSuite Push Eval</name>
-    <description>
-        Test App for experimenting with different Push Technologies
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<widget id="com.bbraun.spaceserver.pusheval" version="1.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+	<name>OnlineSuite Push Eval</name>
+	<description>&#xD;
+        Test App for experimenting with different Push Technologies&#xD;
     </description>
-    <author email="jonas.kleinkauf@bbraun.com" href="http://www.bbraun.com">
-        Jonas Kleinkauf
+	<author email="jonas.kleinkauf@bbraun.com" href="http://www.bbraun.com">&#xD;
+        Jonas Kleinkauf&#xD;
     </author>
-    <content src="index.html" />
-    <access origin="*" />
-    <icon src="images/OS_DBG.png" />
+	<content src="index.html"/>
+	<access origin="*"/>
+	<icon src="images/OS_DBG.png"/>
+	<hook src="scripts/incrementBuildNum.js" type="after_run"/>
+	<preference name="orientation" value="portrait"/>
 </widget>

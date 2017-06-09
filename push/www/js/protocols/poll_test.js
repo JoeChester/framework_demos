@@ -5,20 +5,23 @@ var poll = {
     ip: null,
 
     poll: function () {
-        axios.get('http://' + poll.ip + '/poll/' + poll.id)
-            .then(function (response) {
+        $$.ajax({
+            method: 'get',
+            url: 'http://' + poll.ip + '/poll/' + poll.id,
+            success: function (data, statusCode, xhr) {
                 registerPing("Poll", "HTTP Polling");
-                let msgs = response.data
-                for (let i in msgs) {
+                var msgs = JSON.parse(data);
+                for (var i in msgs) {
                     notify(msgs[i], "HTTP Polling");
                 }
-            })
-            .catch(function (error) {
+            },
+            error: function (xhr, status) {
                 clearInterval(poll.interval);
                 setConnectedIndicator(false);
                 poll.isActive = false;
                 connectionLost("Disconnected from HTTP Polling Server", "HTTP Polling");
-            });
+            }
+        });
     },
 
     start: function (ip, ping) {
@@ -32,23 +35,24 @@ var poll = {
         pingCount = 0;
 
         //register
-        //register
-        axios({
+        $$.ajax({
             method: 'post',
-            url: regUrl
-        }).then((response) => {
-            poll.id = response.data.id
-            poll.interval = setInterval(poll.poll, 3000)
-            setConnectedIndicator(true);
-            poll.isActive = true;
-            console.pushlog("Registered HTTP Polling Client with ID " + poll.id);
-        }).catch((error) => {
-            poll.isActive = false;
-            setConnectedIndicator(false);
-            if(poll.interval != null){
-                clearInterval(poll.interval);
+            url: regUrl,
+            success: function (data, status, xhr) {
+                poll.id = JSON.parse(data).id;
+                poll.interval = setInterval(poll.poll, ping * 1000);
+                setConnectedIndicator(true);
+                poll.isActive = true;
+                console.pushlog("Registered HTTP Polling Client with ID " + poll.id);
+            },
+            error: function (xhr, status) {
+                poll.isActive = false;
+                setConnectedIndicator(false);
+                if (poll.interval != null) {
+                    clearInterval(poll.interval);
+                }
+                console.pusherror("An error occurred during the HTTP Polling registration. Code:" + status);
             }
-            console.pusherror(error)
         });
     },
 

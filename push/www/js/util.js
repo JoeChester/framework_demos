@@ -40,10 +40,10 @@ function setConnectedIndicator(connected) {
         $$('#active-indicator').removeClass("inactive");
 
         var type = $$('input[name=protocol]:checked')[0].value;
-        if(type != null){
+        if (type != null) {
             $$('#type-indicator').html(type);
         }
-        
+
     } else {
         $$('#active-indicator').addClass("inactive");
         $$('#active-indicator').removeClass("active");
@@ -118,4 +118,38 @@ function connectionLost(msg, type) {
             color: 'C5004B'
         });
     }
+}
+
+function logBatteryStatus(status) {
+    var entry = {
+        timestamp: moment().format("HH:mm:ss"),
+        level: status.level
+    }
+
+    var batteryStatistics = window.localStorage.batteryStatistics;
+    if (typeof batteryStatistics === 'undefined' || batteryStatistics == null) {
+        batteryStatistics = [];
+    } else {
+        batteryStatistics = JSON.parse(batteryStatistics);
+    }
+
+    batteryStatistics.push(entry);
+    window.localStorage.batteryStatistics = JSON.stringify(batteryStatistics);
+}
+
+function registerBatteryCallbacks() {
+    if (hasCordova()) {
+        window.addEventListener("batterystatus", logBatteryStatus, false);
+    }
+}
+
+function printBatteryStatistics() {
+    var batteryStatistics = JSON.parse(window.localStorage.batteryStatistics);
+    console.pushlog("Writing battery statistics to debug console")
+    console.log(JSON.stringify(batteryStatistics));
+}
+
+function resetBatteryStatistics() {
+    window.localStorage.batteryStatistics = JSON.stringify([]);
+    console.pusherror("Battery statistics resetted!");
 }

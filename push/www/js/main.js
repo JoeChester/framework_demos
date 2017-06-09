@@ -80,7 +80,12 @@ function qr(){
    );
 }
 
+function init(){
+    initializeBackgroundMode();
+    registerBatteryCallbacks();
+    registerFcmCallbacks();
+}
+
 console.pushlog("Created with ❤ by Jonas Kleinkauf @ B.Braun Melsungen AG");
 console.pushmsg("Welcome to the OnlineSuite Push Eval Debug App!");
-document.addEventListener("deviceready", initializeBackgroundMode, false);
-document.addEventListener("deviceready", registerFcmCallbacks, false);
+document.addEventListener("deviceready", init, false);
