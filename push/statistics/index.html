@@ -1,0 +1,75 @@
+<html>
+
+<head>
+    <script src="lib/Chart.bundle.min.js"></script>
+    <script src="lib/moment.js"></script>
+    <script src="values/demo.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+</head>
+
+<body>
+    <canvas id="myChart" width="1900" height="900"></canvas>
+    <script>
+        var ctx = document.getElementById("myChart").getContext('2d');
+
+        var dataset = JSON.parse(JSON.stringify(demo));
+
+        var timestamps = [];
+        var levels = [];
+        for (var i in dataset) {
+            timestamps.push(dataset[i].timestamp);
+            levels.push(dataset[i].level);
+        }
+
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: timestamps,
+                datasets: [{
+                    label: 'Wiko Lenny',
+                    data: levels,
+                    backgroundColor: [
+                        'rgba(0,180,130,0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(0,180,130,1)'
+                    ],
+                    borderWidth: 1,
+                    pointRadius: 1,
+                }]
+            },
+            options: {
+                responsive: false,
+                scales: {
+                    xAxes: [{
+                        type: "time",
+                        time: {
+                            format: "HH:mm:ss",
+                            tooltipFormat: "HH:mm:ss",
+                            displayFormats: {
+                                'millisecond': 'HH:mm',
+                                'second': 'HH:mm',
+                                'minute': 'HH:mm',
+                                'hour': 'HH:mm',
+                                'day': 'HH:mm',
+                                'week': 'HH:mm',
+                                'month': 'HH:mm',
+                                'quarter': 'HH:mm',
+                                'year': 'HH:mm'
+                            },
+                            unit: 'hour',
+                            unitStepSize: 1
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
