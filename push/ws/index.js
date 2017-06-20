@@ -8,6 +8,8 @@ const heartbeatPayload = '.';
 
 let nextClientId = 0
 
+let pingIntervalSeconds = 10;
+
 function heartbeat(ws) {
   ws.isAlive = true;
 }
@@ -63,7 +65,7 @@ const interval = setInterval(function ping() {
     ws.isAlive = false;
     ws.send(heartbeatPayload);
   });
-}, 10000);
+}, pingIntervalSeconds * 1000);
 
 console.log("");
 console.log(chalk.bold.green("B.Braun OnlineSuite Push Technology Evaluation - WebSockets"));

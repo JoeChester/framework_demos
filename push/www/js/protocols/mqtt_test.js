@@ -29,12 +29,14 @@ var mqtt = {
         var address = ip.split(':');
         console.pushlog("Starting MQTT Client to port " + address[1]);
 
+        var deviceId = "pushEval_" + getRandomInt(0, 10000);
+
         cordova.plugins.CordovaMqTTPlugin.connect({
             url: "tcp://" + address[0],
             port: address[1],
             connectionTimeout: 3000,
             keepAlive: ping,
-            clientId:"HTC_10",
+            clientId: deviceId,
             success: function (s) {
                 console.pushlog("MQTT Connection established!");
                 mqtt.subscribe();
