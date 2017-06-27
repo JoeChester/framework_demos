@@ -11,7 +11,7 @@ let nextClientId = 0
 
 let clients = []
 
-let pingInterval = 10;
+let pingInterval = 2;
 
 function rawBody(req, res, next) {
     req.setEncoding('utf8');

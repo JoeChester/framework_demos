@@ -1,0 +1,127 @@
+<html>
+
+<head>
+    <script src="lib/Chart.bundle.min.js"></script>
+    <script src="lib/moment.js"></script>
+
+    <script src="values/ws2/htc_10.js"></script>
+    <script src="values/ws2/wiko_lenny.js"></script>
+    <script src="values/ws2/samsung_s4_mini.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <title>SSE 10</title>
+</head>
+
+<body>
+    <canvas id="batteryChart" width="1900" height="900"></canvas>
+    <script>
+        var ctx = document.getElementById("batteryChart").getContext('2d');
+
+        // Load different datasets
+        var htc10_dataset = JSON.parse(JSON.stringify(htc10));
+        var htc10_levels = [];
+        for (var h in htc10_dataset) {
+            htc10_levels.push({
+                x: htc10_dataset[h].timestamp,
+                y: htc10_dataset[h].level
+            });
+        }
+
+        var samsungS4mini_dataset = JSON.parse(JSON.stringify(samsungS4mini));
+        var samsungS4mini_levels = [];
+        for (var s in samsungS4mini_dataset) {
+            samsungS4mini_levels.push({
+                x: samsungS4mini_dataset[s].timestamp,
+                y: samsungS4mini_dataset[s].level
+            });
+        }
+
+        var wikoLenny_dataset = JSON.parse(JSON.stringify(wikoLenny));
+        var wikoLenny_levels = [];
+        for (var w in wikoLenny_dataset) {
+            wikoLenny_levels.push({
+                x: wikoLenny_dataset[w].timestamp,
+                y: wikoLenny_dataset[w].level
+            });
+        }
+
+        var batteryChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                datasets: [
+                    {
+                    label: 'HTC 10',
+                    data: htc10_levels,
+                    backgroundColor: [
+                        'rgba(0,180,130,0)'
+                    ],
+                    borderColor: [
+                        'rgba(0,180,130,1)'
+                    ],
+                    borderWidth: 2,
+                    pointRadius: 1,
+                    lineTension: 0
+                },
+                {
+                    label: 'Samsung S4 mini',
+                    data: samsungS4mini_levels,
+                    backgroundColor: [
+                        'rgba(113,30,130,0)'
+                    ],
+                    borderColor: [
+                        'rgba(113,30,130,1)'
+                    ],
+                    borderWidth: 2,
+                    pointRadius: 1,
+                   lineTension: 0
+                },
+                {
+                    label: 'Wiko Lenny',
+                    data: wikoLenny_levels,
+                    backgroundColor: [
+                        'rgba(110,110,110,0)'
+                    ],
+                    borderColor: [
+                        'rgba(110,110,110,1)'
+                    ],
+                    borderWidth: 2,
+                    pointRadius: 1,
+                    lineTension: 0
+                }
+                ]
+            },
+            options: {
+                responsive: false,
+                scales: {
+                    xAxes: [{
+                        type: "time",
+                        time: {
+                            format: "HH:mm:ss",
+                            tooltipFormat: "HH:mm:ss",
+                            displayFormats: {
+                                'millisecond': 'HH:mm',
+                                'second': 'HH:mm',
+                                'minute': 'HH:mm',
+                                'hour': 'HH:mm',
+                                'day': 'HH:mm',
+                                'week': 'HH:mm',
+                                'month': 'HH:mm',
+                                'quarter': 'HH:mm',
+                                'year': 'HH:mm'
+                            },
+                            unit: 'hour',
+                            unitStepSize: 1
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: false
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
