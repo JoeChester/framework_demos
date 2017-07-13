@@ -4,12 +4,12 @@
     <script src="lib/Chart.bundle.min.js"></script>
     <script src="lib/moment.js"></script>
 
-    <script src="values/ws10/htc_10.js"></script>
-    <script src="values/ws10/wiko_lenny.js"></script>
-    <script src="values/ws10/samsung_s4_mini.js"></script>
+    <script src="values/sse2/htc_10.js"></script>
+    <script src="values/sse2/wiko_lenny.js"></script>
+    <script src="values/sse2/samsung_s4_mini.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-    <title>SSE 10</title>
+    <title>SSE 2</title>
 </head>
 
 <body>
@@ -17,16 +17,16 @@
     <select id="reportTypeSelect">
         <option value="index">None / FCM</option>
         <option value="bg">Background Mode</option>
-        <option value="ws" selected>WebSockets</option>
-        <option value="sse">Server Sent Events</option>
+        <option value="ws">WebSockets</option>
+        <option value="sse" selected>Server Sent Events</option>
         <option value="mqtt">MQTT</option>
         <option value="http">HTTP Polling</option>
     </select>
 
     Ping Interval (seconds): 
     <select id="pingIntervalSelect">
-        <option value="2">2</option>
-        <option value="10" selected>10</option>
+        <option value="2" selected>2</option>
+        <option value="10">10</option>
     </select>
     (no interval for FCM and Background Mode)
     <script>

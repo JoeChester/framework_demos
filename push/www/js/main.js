@@ -35,9 +35,9 @@ function start(){
         currentProtocol.start(ip, ping);
     }
     
-    if(type != "fcm"){
-        startBackgroundMode();
-    }
+    //if(type != "fcm"){
+    startBackgroundMode();
+    //}
 }
 
 function stop(){

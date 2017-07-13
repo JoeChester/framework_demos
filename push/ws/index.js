@@ -8,7 +8,7 @@ const heartbeatPayload = '.';
 
 let nextClientId = 0
 
-let pingIntervalSeconds = 2;
+let pingIntervalSeconds = 3;
 
 function heartbeat(ws) {
   ws.isAlive = true;

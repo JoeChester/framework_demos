@@ -13,6 +13,42 @@
 </head>
 
 <body>
+    Protocol:
+    <select id="reportTypeSelect">
+        <option value="index">None / FCM</option>
+        <option value="bg">Background Mode</option>
+        <option value="ws">WebSockets</option>
+        <option value="sse">Server Sent Events</option>
+        <option value="mqtt">MQTT</option>
+        <option value="http" selected>HTTP Polling</option>
+    </select>
+
+    Ping Interval (seconds): 
+    <select id="pingIntervalSelect">
+        <option value="2">2</option>
+        <option value="10" selected>10</option>
+    </select>
+    (no interval for FCM and Background Mode)
+    <script>
+        function changeReport(){
+            var rtSelect = document.getElementById("reportTypeSelect");
+            var rt = rtSelect.options[rtSelect.selectedIndex].value;
+
+            var piSelect = document.getElementById("pingIntervalSelect");
+            var pi = piSelect.options[piSelect.selectedIndex].value;
+
+            var nextLoc;
+            if(rt == "index" || rt == "bg"){
+                nextLoc = rt;
+            } else {
+                nextLoc = rt + pi;
+            }
+
+            window.location = nextLoc; 
+        }
+    </script>
+    <button onclick="changeReport()">Go!</button>
+
     <canvas id="batteryChart" width="1900" height="900"></canvas>
     <script>
         var ctx = document.getElementById("batteryChart").getContext('2d');
@@ -115,7 +151,7 @@
                     }],
                     yAxes: [{
                         ticks: {
-                            beginAtZero: false
+                            suggestedMin: 70
                         }
                     }]
                 }

@@ -1,0 +1,1 @@
+var htc10 = [{"timestamp":"08:00:00","level":100},{"timestamp":"16:00:00","level":92}];

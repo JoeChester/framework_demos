@@ -1,0 +1,1 @@
+var samsungS4mini = [{"timestamp":"08:00:00","level":100},{"timestamp":"16:00:00","level":99}];
